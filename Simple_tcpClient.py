@@ -1,6 +1,7 @@
 # Alice - Client
 
 from socket import *
+import random
 
 def caesar(data, key, ecrypyt = True):
     if ecrypyt is False : key = -key
@@ -14,6 +15,14 @@ def caesar(data, key, ecrypyt = True):
         result.append(encrypted)
     return ''.join(result)
 
+def generate_prime_number(bits):
+    while True:
+        number = random.getrandbits(bits)
+        number |= (1 << bits - 1) | 1
+        
+        if prime_number_check(number):
+            return number
+
 def prime_number_check(number):
     i = 2
     while i < number:
@@ -25,17 +34,10 @@ def prime_number_check(number):
         
     return True
 
-G = int(input("Digite um numero primo (G) para o algoritmo de Diffie-Hellmann\nNote: Quanto maior o numero primo melhor\nSugestão: 7877\n"))
-while prime_number_check(G) == False :
-    G =  int(input("O numero digitado não é primo. Por favor insira outro numero.\n"))
-    prime_number_check(G)
+G = generate_prime_number(16)
+N = generate_prime_number(16)
 
-N = int(input("Digite outro numero primo (N) para o algoritmo de Diffie-Hellmann\nNote: Quanto maior o numero primo melhor\nSugestão: 7919\n"))
-while prime_number_check(N) == False :
-    N =  int(input("O numero digitado não é primo. Por favor insira outro numero.\n"))
-    prime_number_check(N)
-
-x = int(input("Agora escolha seu numero privado para o Diffie-Hellmann: "))
+x = int(input("Escolha seu numero privado para o Diffie-Hellmann: "))
     
 serverName = "10.1.70.37"
 serverPort = 1300
