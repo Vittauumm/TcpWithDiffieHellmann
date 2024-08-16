@@ -2,8 +2,6 @@
 
 from socket import *
 
-y = 687169
-
 def caesar(data, key, ecrypyt=True):
     if ecrypyt == False : key = -key
     result = []
